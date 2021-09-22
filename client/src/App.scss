@@ -1,0 +1,55 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &-showcase {
+    height: 100vh;
+    width: 60vw;
+    margin: 0 auto;
+
+    img,
+    video {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &-form {
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &-input {
+      height: 40px;
+      width: 250px;
+      margin: 10px 0px;
+      padding: 5px;
+      font-size: 18px;
+      outline: none;
+    }
+    &-button {
+      height: 40px;
+      width: 250px;
+      margin: 10px 0px;
+      padding: 5px;
+      font-size: 18px;
+      background-color: #0566c0;
+      border: none;
+      border-radius: 5px;
+      color: #ffffff;
+      cursor: pointer;
+      outline: none;
+    }
+  }
+}
