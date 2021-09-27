@@ -12,6 +12,11 @@ import {
 const App = () => {
 	const [values, setValues] = useState({ email: "", rollNumber: "" });
 
+	const discordid = new URLSearchParams(window.location.search).get(
+		"discordid"
+	);
+	console.log(discordid);
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (values.email.includes("vidyaacademy.ac.in")) {
@@ -36,34 +41,42 @@ const App = () => {
 				</div>
 			</header>
 			<div className="form-container">
-				<h3>Details Please</h3>
-				<form action="">
-					<span className="form-field">
-						<input type="text" name="name" id="" required />
-						<AiOutlineUser className="icon" />
-						<label htmlFor="name">Name</label>
-						<i className="bar"></i>
-					</span>
-					<span className="form-field">
-						<input type="text" name="admission" id="" required />
-						<AiOutlineNumber className="icon" />
-						<label htmlFor="admission">Admission Number</label>
-						<i className="bar"></i>
-					</span>
-					<span className="form-field">
-						<input type="email" name="email" id="" required />
-						<AiOutlineMail className="icon" />
-						<label htmlFor="email">College Email ID</label>
-						<i className="bar"></i>
-					</span>
-					<span className="form-field">
-						<input type="tel" name="phone" id="" required />
-						<AiOutlinePhone className="icon" />
-						<label htmlFor="phone">Phone Number</label>
-						<i className="bar"></i>
-					</span>
-					<button type="submit">Proceed</button>
-				</form>
+				{discordid ? (
+					<>
+						<h3>Your Details</h3>
+						<form action="">
+							<span className="form-field">
+								<input type="text" name="name" id="" required />
+								<AiOutlineUser className="icon" />
+								<label htmlFor="name">Name</label>
+								<i className="bar"></i>
+							</span>
+							<span className="form-field">
+								<input type="text" name="admission" id="" required />
+								<AiOutlineNumber className="icon" />
+								<label htmlFor="admission">Admission Number</label>
+								<i className="bar"></i>
+							</span>
+							<span className="form-field">
+								<input type="email" name="email" id="" required />
+								<AiOutlineMail className="icon" />
+								<label htmlFor="email">College Email ID</label>
+								<i className="bar"></i>
+							</span>
+							<span className="form-field">
+								<input type="tel" name="phone" id="" required />
+								<AiOutlinePhone className="icon" />
+								<label htmlFor="phone">Phone Number</label>
+								<i className="bar"></i>
+							</span>
+							<button type="submit">Proceed</button>
+						</form>
+					</>
+				) : (
+					<>
+						<h4>Please use the link sent to you by our trusty bot!</h4>
+					</>
+				)}
 			</div>
 		</div>
 	);
