@@ -7,6 +7,7 @@ import {
 	AiOutlineNumber,
 	AiOutlineMail,
 	AiOutlinePhone,
+	AiOutlineLock,
 } from "react-icons/ai";
 
 const App = () => {
@@ -26,6 +27,10 @@ const App = () => {
 		}
 	};
 
+	const handleVerification = (e) => {
+		e.preventDefault();
+	};
+
 	return (
 		<div className="app">
 			<header>
@@ -43,28 +48,50 @@ const App = () => {
 			<div className="form-container">
 				{discordid ? (
 					<>
-						<h3>Your Details</h3>
-						<form action="">
+						<span className="form-heading">
+							<h3>Your Details</h3>
+							<p>Tell us about yourself</p>
+						</span>
+						<form onSubmit={handleSubmit}>
 							<span className="form-field">
-								<input type="text" name="name" id="" required />
+								<input type="text" name="name" id="" placeholder=" " required />
 								<AiOutlineUser className="icon" />
 								<label htmlFor="name">Name</label>
 								<i className="bar"></i>
 							</span>
 							<span className="form-field">
-								<input type="text" name="admission" id="" required />
+								<input
+									type="text"
+									name="admission"
+									id=""
+									placeholder=" "
+									required
+								/>
 								<AiOutlineNumber className="icon" />
 								<label htmlFor="admission">Admission Number</label>
 								<i className="bar"></i>
 							</span>
 							<span className="form-field">
-								<input type="email" name="email" id="" required />
+								<input
+									type="email"
+									name="email"
+									id=""
+									placeholder=" "
+									required
+								/>
 								<AiOutlineMail className="icon" />
 								<label htmlFor="email">College Email ID</label>
 								<i className="bar"></i>
 							</span>
 							<span className="form-field">
-								<input type="tel" name="phone" id="" required />
+								<input
+									type="tel"
+									pattern="^[0-9 +]+$"
+									name="phone"
+									id=""
+									placeholder=" "
+									required
+								/>
 								<AiOutlinePhone className="icon" />
 								<label htmlFor="phone">Phone Number</label>
 								<i className="bar"></i>
@@ -73,10 +100,27 @@ const App = () => {
 						</form>
 					</>
 				) : (
-					<>
+					<div className="link-warning">
 						<h4>Please use the link sent to you by our trusty bot!</h4>
-					</>
+					</div>
 				)}
+				<div className="verification ">
+					<span className="form-heading">
+						<h3>Verification</h3>
+						<p>
+							Let us see who you really are. Check your college mail for an OTP.
+						</p>
+					</span>
+					<form onSubmit={handleVerification}>
+						<span className="form-field">
+							<input type="text" name="otp" id="" placeholder=" " required />
+							<AiOutlineLock className="icon" />
+							<label htmlFor="otp">OTP</label>
+							<i className="bar"></i>
+						</span>
+						<button type="submit">Finish Up!</button>
+					</form>
+				</div>
 			</div>
 		</div>
 	);
