@@ -221,19 +221,48 @@ button:focus {
 	top: 0;
 	left: 0;
 	right: 0;
-	bottom: 0;
+	bottom: -60px;
 	z-index: 10;
-	overflow: hidden;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	padding: 20px 30px;
-	top: 100%;
-	transition: top 1s cubic-bezier(0.6, 0.01, 0.18, 1);
+	top: 130%;
+	transition: top 1s cubic-bezier(0.6, 0.01, 0.18, 1),
+		bottom 1s cubic-bezier(0.6, 0.01, 0.18, 1);
+
+	& > span,
+	form {
+		transition: opacity 500ms cubic-bezier(0.6, 0.01, 0.18, 1);
+	}
+
+	& > span,
+	form {
+		opacity: 0%;
+	}
 
 	&.visible {
-		top: 0;
+		top: 0%;
+		bottom: 0;
+
+		& > * {
+			opacity: 100%;
+		}
+	}
+
+	&::before {
+		content: " ";
+		display: block;
+		position: inherit;
+		top: -60px;
+		background: url("./resources/wave.svg");
+		background-position: 50%;
+		background-size: cover;
+		background-repeat: no-repeat;
+		height: 60px;
+		width: 100%;
+		z-index: -1;
 	}
 
 	& p {
