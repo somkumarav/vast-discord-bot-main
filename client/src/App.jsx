@@ -8,10 +8,12 @@ import {
 	AiOutlineMail,
 	AiOutlinePhone,
 	AiOutlineLock,
+	AiOutlineClose,
 } from "react-icons/ai";
 
 const App = () => {
 	const [values, setValues] = useState({ email: "", rollNumber: "" });
+	const [verification, setVerification] = useState(true);
 
 	const discordid = new URLSearchParams(window.location.search).get(
 		"discordid"
@@ -20,11 +22,16 @@ const App = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		setVerification(true);
 		if (values.email.includes("vidyaacademy.ac.in")) {
 			console.log("successful");
 		} else {
 			console.log("unsuccessful");
 		}
+	};
+
+	const handleBack = () => {
+		setVerification(false);
 	};
 
 	const handleVerification = (e) => {
@@ -104,7 +111,10 @@ const App = () => {
 						<h4>Please use the link sent to you by our trusty bot!</h4>
 					</div>
 				)}
-				<div className="verification ">
+				<div className={`verification ${verification ? "visible" : ""}`}>
+					<button className="close" onClick={handleBack}>
+						<AiOutlineClose />
+					</button>
 					<span className="form-heading">
 						<h3>Verification</h3>
 						<p>
