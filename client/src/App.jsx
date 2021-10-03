@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "./App.scss";
 import vastLogo from "./resources/vast.gif";
 import discordLogo from "./resources/discord.svg";
@@ -14,6 +14,11 @@ import {
 const App = () => {
 	const [values, setValues] = useState({ email: "", rollNumber: "" });
 	const [verification, setVerification] = useState(false);
+
+	const nameRef = useRef();
+	const admRef = useRef();
+	const emailRef = useRef();
+	const phoneRef = useRef();
 
 	const discordid = new URLSearchParams(window.location.search).get(
 		"discordid"
@@ -60,7 +65,13 @@ const App = () => {
 						</span>
 						<form onSubmit={handleSubmit}>
 							<span className="form-field">
-								<input type="text" name="name" id="" placeholder=" " required />
+								<input
+									type="text"
+									name="name"
+									ref={nameRef}
+									placeholder=" "
+									required
+								/>
 								<AiOutlineUser className="icon" />
 								<label htmlFor="name">Name</label>
 								<i className="bar"></i>
@@ -69,7 +80,7 @@ const App = () => {
 								<input
 									type="text"
 									name="admission"
-									id=""
+									ref={admRef}
 									placeholder=" "
 									required
 								/>
@@ -81,7 +92,8 @@ const App = () => {
 								<input
 									type="email"
 									name="email"
-									id=""
+									ref={emailRef}
+									pattern="[\w.%+-]+@vidyaacademy\.ac.in"
 									placeholder=" "
 									required
 								/>
@@ -94,7 +106,7 @@ const App = () => {
 									type="tel"
 									pattern="^[0-9 +]+$"
 									name="phone"
-									id=""
+									ref={phoneRef}
 									placeholder=" "
 									required
 								/>
