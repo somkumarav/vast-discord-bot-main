@@ -9,11 +9,13 @@ import {
 	AiOutlinePhone,
 	AiOutlineLock,
 	AiOutlineClose,
+	AiOutlineCheck,
 } from "react-icons/ai";
 
 const App = () => {
 	const [values, setValues] = useState({ email: "", rollNumber: "" });
 	const [verification, setVerification] = useState(false);
+	const [success, setSuccess] = useState(false);
 
 	const nameRef = useRef();
 	const admRef = useRef();
@@ -40,6 +42,7 @@ const App = () => {
 
 	const handleVerification = (e) => {
 		e.preventDefault();
+		setSuccess(true);
 	};
 
 	return (
@@ -116,32 +119,46 @@ const App = () => {
 							</span>
 							<button type="submit">Proceed</button>
 						</form>
+						<div className={`verification ${verification ? "visible" : ""}`}>
+							<button className="close" onClick={handleBack}>
+								<AiOutlineClose />
+							</button>
+							<span className="form-heading">
+								<h3>Verification</h3>
+								<p>
+									Let us see who you really are. Check your college mail for an
+									OTP.
+								</p>
+							</span>
+							<form onSubmit={handleVerification}>
+								<span className="form-field">
+									<input
+										type="text"
+										name="otp"
+										id=""
+										placeholder=" "
+										required
+									/>
+									<AiOutlineLock className="icon" />
+									<label htmlFor="otp">OTP</label>
+									<i className="bar"></i>
+								</span>
+
+								<button type="submit">Finish Up!</button>
+							</form>
+						</div>
+						<div className={`success ${success ? "visible" : ""}`}>
+							<span className="tick">
+								<AiOutlineCheck />
+							</span>
+							<h4>Success! Head over to Discord.</h4>
+						</div>
 					</>
 				) : (
 					<div className="link-warning">
 						<h4>Please use the link sent to you by our trusty bot!</h4>
 					</div>
 				)}
-				<div className={`verification ${verification ? "visible" : ""}`}>
-					<button className="close" onClick={handleBack}>
-						<AiOutlineClose />
-					</button>
-					<span className="form-heading">
-						<h3>Verification</h3>
-						<p>
-							Let us see who you really are. Check your college mail for an OTP.
-						</p>
-					</span>
-					<form onSubmit={handleVerification}>
-						<span className="form-field">
-							<input type="text" name="otp" id="" placeholder=" " required />
-							<AiOutlineLock className="icon" />
-							<label htmlFor="otp">OTP</label>
-							<i className="bar"></i>
-						</span>
-						<button type="submit">Finish Up!</button>
-					</form>
-				</div>
 			</div>
 		</div>
 	);
