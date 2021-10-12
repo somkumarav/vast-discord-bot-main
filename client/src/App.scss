@@ -315,6 +315,15 @@ button:focus {
 			background-color: #ccc;
 		}
 	}
+
+	& .otp-resend {
+		font-size: 0.7em;
+		& a {
+			cursor: pointer;
+			text-decoration: underline;
+			color: white;
+		}
+	}
 }
 
 .success {

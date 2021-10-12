@@ -45,6 +45,10 @@ const App = () => {
 		setSuccess(true);
 	};
 
+	const handleOtpResend = (e) => {
+		e.preventDefault();
+	};
+
 	return (
 		<div className="app">
 			<header>
@@ -143,7 +147,9 @@ const App = () => {
 									<label htmlFor="otp">OTP</label>
 									<i className="bar"></i>
 								</span>
-
+								<p className="otp-resend">
+									Didn't get the OTP? <a onClick={handleOtpResend}>Resend it</a>
+								</p>
 								<button type="submit">Finish Up!</button>
 							</form>
 						</div>
