@@ -35,7 +35,7 @@ router.post('/verify', async (req, res) => {
       if (otpExpiryTime + 1000 * 60 * 3 >= Date.now()) {
         console.log(otpExpiryTime, Date.now());
         if (dbOtp === otp) {
-          const user = await bot.user?.fetch(discordId.toString()); // discord user id
+          const user = await bot.users?.fetch(discordId.toString()); // discord user id
           const guild = await bot.guilds.fetch('847002678667640872'); // discord guild id aka discord server id
           // const member = await (
           //   await guild.members.fetch(user as UserResolvable)

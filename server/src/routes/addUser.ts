@@ -52,8 +52,10 @@ router.post('/add', async (req, res) => {
         .collection('user-details')
         .doc(admissionNumber.toString().toUpperCase());
       await addRef.set({
+        admissionNumber,
         email,
         OTP: newOtp,
+        verified: false,
         OTPTime: Date.now(),
       });
       const mailOptions = {
@@ -79,6 +81,7 @@ router.post('/add', async (req, res) => {
         admissionNumber,
         email,
         OTP: newOtp,
+        verified: false,
         OTPTime: Date.now(),
       });
       const mailOptions = {

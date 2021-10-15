@@ -12,10 +12,14 @@ router.post('/regen', async (req, res) => {
     const addRef = db
       .collection('user-details')
       .doc(admissionNumber.toString().toUpperCase());
-    if ((await addRef.get()).data()?.verified) {
+    const verifiedDb = await (await addRef.get()).data()?.verified;
+    if (verifiedDb === false) {
       await addRef.set({
+        admissionNumber,
+        email,
         OTP: newOtp,
         OTPTime: Date.now(),
+        verified: false,
       });
       const mailOptions = {
         from: 'vastdiscordbot@gmail.com',
