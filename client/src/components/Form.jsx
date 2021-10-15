@@ -17,14 +17,43 @@ const Form = () => {
 	const admRef = useRef();
 	const emailRef = useRef();
 	const phoneRef = useRef();
+	const otpRef = useRef();
 
 	const discordid = new URLSearchParams(window.location.search).get(
 		"discordid"
 	);
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		setVerification(true);
+		const user = {
+			discordId: discordid,
+			name: nameRef.current.value,
+			email: emailRef.current.value,
+			admissionNumer: admRef.current.value,
+			department: admRef.current.value.substring(6, 8),
+			phoneNumber: phoneRef.current.value,
+		};
+
+		await fetch("https://api.vastdiscord.ml/add", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(user),
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				if (data.status == "Successful") {
+					setVerification(true);
+				} else {
+					// setToastMessage(data.status);
+					// setToast(true);
+					// setTimeout(() => {
+					// 	setToast(false);
+					// 	setToastMessage("");
+					// }, 3000);
+				}
+			});
 	};
 
 	const handleBack = () => {
@@ -33,11 +62,55 @@ const Form = () => {
 
 	const handleVerification = (e) => {
 		e.preventDefault();
-		setSuccess(true);
+		const otp = {
+			otp: otpRef.current.value,
+		};
+		await fetch("https://api.vastdiscord.ml/verify", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(user),
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				if (data.status == "Successful") {
+					setSuccess(true);
+				} else {
+					// setToastMessage(data.status);
+					// setToast(true);
+					// setTimeout(() => {
+					// 	setToast(false);
+					// 	setToastMessage("");
+					// }, 3000);
+				}
+			});
 	};
 
 	const handleOtpResend = (e) => {
 		e.preventDefault();
+		const user = {
+			email: emailRef.current.value,
+			admissionNumer: admRef.current.value,
+		};
+		await fetch("https://api.vastdiscord.ml/regen", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(user),
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				if (data.status == "Successful") {
+					// setToastMessage(data.status);
+					// setToast(true);
+					// setTimeout(() => {
+					// 	setToast(false);
+					// 	setToastMessage("");
+					// }, 3000);
+				}
+			});
 	};
 
 	return (
@@ -114,7 +187,14 @@ const Form = () => {
 						</span>
 						<form onSubmit={handleVerification}>
 							<span className="form-field">
-								<input type="text" name="otp" id="" placeholder=" " required />
+								<input
+									type="text"
+									name="otp"
+									id=""
+									placeholder=" "
+									ref={otpRef}
+									required
+								/>
 								<AiOutlineLock className="icon" />
 								<label htmlFor="otp">OTP</label>
 								<i className="bar"></i>
