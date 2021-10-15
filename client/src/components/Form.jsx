@@ -43,7 +43,7 @@ const Form = () => {
 		})
 			.then((response) => response.json())
 			.then((data) => {
-				if (data.status == "Successful") {
+				if (data.status === "Successful") {
 					setVerification(true);
 				} else {
 					// setToastMessage(data.status);
@@ -60,7 +60,7 @@ const Form = () => {
 		setVerification(false);
 	};
 
-	const handleVerification = (e) => {
+	const handleVerification = async (e) => {
 		e.preventDefault();
 		const otp = {
 			otp: otpRef.current.value,
@@ -70,11 +70,11 @@ const Form = () => {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify(user),
+			body: JSON.stringify(otp),
 		})
 			.then((response) => response.json())
 			.then((data) => {
-				if (data.status == "Successful") {
+				if (data.status === "Successful") {
 					setSuccess(true);
 				} else {
 					// setToastMessage(data.status);
@@ -87,7 +87,7 @@ const Form = () => {
 			});
 	};
 
-	const handleOtpResend = (e) => {
+	const handleOtpResend = async (e) => {
 		e.preventDefault();
 		const user = {
 			email: emailRef.current.value,
@@ -102,7 +102,7 @@ const Form = () => {
 		})
 			.then((response) => response.json())
 			.then((data) => {
-				if (data.status == "Successful") {
+				if (data.status === "Successful") {
 					// setToastMessage(data.status);
 					// setToast(true);
 					// setTimeout(() => {

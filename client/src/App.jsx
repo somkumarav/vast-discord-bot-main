@@ -2,8 +2,16 @@ import "./App.scss";
 import Form from "./components/Form";
 import vastLogo from "./resources/vast.gif";
 import discordLogo from "./resources/discord.svg";
+import toast, { Toaster } from "react-hot-toast";
 
 const App = () => {
+	const notify = (status) => {
+		switch (status) {
+			case "success":
+				break;
+		}
+	};
+
 	return (
 		<div className="app">
 			<header>
