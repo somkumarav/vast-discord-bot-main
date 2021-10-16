@@ -9,7 +9,7 @@ import {
 	AiOutlineCheck,
 } from "react-icons/ai";
 
-const Form = () => {
+const Form = ({ toaster }) => {
 	const [verification, setVerification] = useState(false);
 	const [success, setSuccess] = useState(false);
 
@@ -26,12 +26,8 @@ const Form = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const user = {
-			discordId: discordid,
-			name: nameRef.current.value,
 			email: emailRef.current.value,
-			admissionNumer: admRef.current.value,
-			department: admRef.current.value.substring(6, 8),
-			phoneNumber: phoneRef.current.value,
+			admissionNumber: admRef.current.value,
 		};
 
 		await fetch("https://api.vastdiscord.ml/add", {
@@ -43,15 +39,10 @@ const Form = () => {
 		})
 			.then((response) => response.json())
 			.then((data) => {
-				if (data.status === "Successful") {
+				if (data.type === "Ok") {
 					setVerification(true);
 				} else {
-					// setToastMessage(data.status);
-					// setToast(true);
-					// setTimeout(() => {
-					// 	setToast(false);
-					// 	setToastMessage("");
-					// }, 3000);
+					toaster(data.type, data.msg);
 				}
 			});
 	};
@@ -62,27 +53,27 @@ const Form = () => {
 
 	const handleVerification = async (e) => {
 		e.preventDefault();
-		const otp = {
-			otp: otpRef.current.value,
+		const user = {
+			discordId: discordid,
+			name: nameRef.current.value,
+			email: emailRef.current.value,
+			admissionNumber: admRef.current.value,
+			department: admRef.current.value.substring(6, 8),
+			otp: parseInt(otpRef.current.value),
 		};
 		await fetch("https://api.vastdiscord.ml/verify", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify(otp),
+			body: JSON.stringify(user),
 		})
 			.then((response) => response.json())
 			.then((data) => {
-				if (data.status === "Successful") {
+				if (data.type === "Ok") {
 					setSuccess(true);
 				} else {
-					// setToastMessage(data.status);
-					// setToast(true);
-					// setTimeout(() => {
-					// 	setToast(false);
-					// 	setToastMessage("");
-					// }, 3000);
+					toaster(data.type, data.msg);
 				}
 			});
 	};
@@ -91,7 +82,7 @@ const Form = () => {
 		e.preventDefault();
 		const user = {
 			email: emailRef.current.value,
-			admissionNumer: admRef.current.value,
+			admissionNumber: admRef.current.value,
 		};
 		await fetch("https://api.vastdiscord.ml/regen", {
 			method: "POST",
@@ -102,13 +93,8 @@ const Form = () => {
 		})
 			.then((response) => response.json())
 			.then((data) => {
-				if (data.status === "Successful") {
-					// setToastMessage(data.status);
-					// setToast(true);
-					// setTimeout(() => {
-					// 	setToast(false);
-					// 	setToastMessage("");
-					// }, 3000);
+				if (data.type === "Ok") {
+					toaster(data.type, data.msg);
 				}
 			});
 	};
@@ -152,6 +138,7 @@ const Form = () => {
 								name="email"
 								ref={emailRef}
 								pattern="[\w.%+-]+@vidyaacademy\.ac.in"
+								oninput="this.setCustomValidity('')"
 								placeholder=" "
 								required
 							/>

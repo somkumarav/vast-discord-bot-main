@@ -5,9 +5,14 @@ import discordLogo from "./resources/discord.svg";
 import toast, { Toaster } from "react-hot-toast";
 
 const App = () => {
-	const notify = (status) => {
-		switch (status) {
-			case "success":
+	const notify = (type, message) => {
+		console.log("Hi there");
+		switch (type) {
+			case "Ok":
+				toast.success(message);
+				break;
+			case "Error":
+				toast.error(message);
 				break;
 		}
 	};
@@ -26,7 +31,8 @@ const App = () => {
 					</span>
 				</div>
 			</header>
-			<Form />
+			<Form toaster={notify} />
+			<Toaster />
 		</div>
 	);
 };
