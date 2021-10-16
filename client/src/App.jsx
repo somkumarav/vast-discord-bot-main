@@ -14,6 +14,8 @@ const App = () => {
 			case "Error":
 				toast.error(message);
 				break;
+			default:
+				toast.error("Something went wrong.");
 		}
 	};
 
