@@ -47,7 +47,6 @@ router.post('/add', async (req, res) => {
       status = { type: 'Error', msg: 'User already exist' };
       res.json(status);
     } else if (userResponse.exists) {
-      console.log('user response');
       const addRef = db
         .collection('user-details')
         .doc(admissionNumber.toString().toUpperCase());
@@ -67,8 +66,6 @@ router.post('/add', async (req, res) => {
       transporter.sendMail(mailOptions, (err, data) => {
         if (err) {
           console.error(err);
-        } else {
-          console.log('email sent');
         }
       });
       status = { type: 'Ok', msg: 'Successful' };
@@ -93,8 +90,6 @@ router.post('/add', async (req, res) => {
       transporter.sendMail(mailOptions, (err, data) => {
         if (err) {
           console.error(err);
-        } else {
-          console.log('email sent');
         }
       });
 

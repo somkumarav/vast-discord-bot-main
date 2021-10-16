@@ -16,7 +16,6 @@ const depts: any = {
 };
 
 router.post('/verify', async (req, res) => {
-  console.log('verify');
   const { admissionNumber, otp, discordId, department, name } = req.body;
   let status: Status;
 
@@ -33,7 +32,6 @@ router.post('/verify', async (req, res) => {
     const dbOtp = doc.data()?.OTP;
     try {
       if (otpExpiryTime + 1000 * 60 * 3 >= Date.now()) {
-        console.log(otpExpiryTime, Date.now());
         if (dbOtp === otp) {
           const user = await bot.users?.fetch(discordId.toString()); // discord user id
           const guild = await bot.guilds.fetch('847002678667640872'); // discord guild id aka discord server id
@@ -58,7 +56,6 @@ router.post('/verify', async (req, res) => {
           res.json(status);
         }
       } else {
-        console.log(otpExpiryTime, Date.now());
         status = { type: 'Error', msg: 'Time-Out' };
         res.json(status);
       }

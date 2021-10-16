@@ -30,8 +30,6 @@ router.post('/regen', async (req, res) => {
       transporter.sendMail(mailOptions, (err, data) => {
         if (err) {
           console.error(err);
-        } else {
-          console.log('email sent');
         }
       });
       status = { type: 'Ok', msg: 'OTP Generated' };
