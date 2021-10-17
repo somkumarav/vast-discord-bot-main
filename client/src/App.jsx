@@ -2,8 +2,23 @@ import "./App.scss";
 import Form from "./components/Form";
 import vastLogo from "./resources/vast.gif";
 import discordLogo from "./resources/discord.svg";
+import toast, { Toaster } from "react-hot-toast";
 
 const App = () => {
+	const notify = (type, message) => {
+		console.log("Hi there");
+		switch (type) {
+			case "Ok":
+				toast.success(message);
+				break;
+			case "Error":
+				toast.error(message);
+				break;
+			default:
+				toast.error("Something went wrong.");
+		}
+	};
+
 	return (
 		<div className="app">
 			<header>
@@ -18,7 +33,8 @@ const App = () => {
 					</span>
 				</div>
 			</header>
-			<Form />
+			<Form toaster={notify} />
+			<Toaster />
 		</div>
 	);
 };
