@@ -138,7 +138,6 @@ const Form = ({ toaster }) => {
 								name="email"
 								ref={emailRef}
 								pattern="[\w.%+-]+@vidyaacademy\.ac.in"
-								oninput="this.setCustomValidity('')"
 								placeholder=" "
 								required
 							/>
@@ -187,7 +186,10 @@ const Form = ({ toaster }) => {
 								<i className="bar"></i>
 							</span>
 							<p className="otp-resend">
-								Didn't get the OTP? <a onClick={handleOtpResend}>Resend it</a>
+								Didn't get the OTP?{" "}
+								<button class="link-button" onClick={handleOtpResend}>
+									Resend it
+								</button>
 							</p>
 							<button type="submit">Finish Up!</button>
 						</form>
