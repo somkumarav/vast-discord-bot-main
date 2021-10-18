@@ -1,6 +1,7 @@
 import express from 'express';
 import { db } from '../server';
 import { generateOTP, Status, transporter } from './addUser';
+import renderMail from '../functions/renderMail';
 const router = express.Router();
 
 router.post('/regen', async (req, res) => {
@@ -22,10 +23,10 @@ router.post('/regen', async (req, res) => {
         verified: false,
       });
       const mailOptions = {
-        from: 'vastdiscordbot@gmail.com',
+        from: 'VAST Discord <vastdiscordbot@gmail.com>',
         to: email,
-        subject: 'Discord OTP',
-        text: `new otp: ${newOtp}`,
+        subject: 'Verification',
+        html: renderMail(newOtp),
       };
       transporter.sendMail(mailOptions, (err, data) => {
         if (err) {

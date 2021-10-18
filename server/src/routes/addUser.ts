@@ -1,6 +1,7 @@
 import express from 'express';
 import nodemailer from 'nodemailer';
 import { db } from '../server';
+import renderMail from '../functions/renderMail';
 
 const router = express.Router();
 export interface Status {
@@ -58,10 +59,10 @@ router.post('/add', async (req, res) => {
         OTPTime: Date.now(),
       });
       const mailOptions = {
-        from: 'vastdiscordbot@gmail.com',
+        from: 'VAST Discord <vastdiscordbot@gmail.com>',
         to: email,
-        subject: 'Discord OTP',
-        text: `otp: ${newOtp}`,
+        subject: 'Verification',
+        html: renderMail(newOtp),
       };
       transporter.sendMail(mailOptions, (err, data) => {
         if (err) {
@@ -82,10 +83,10 @@ router.post('/add', async (req, res) => {
         OTPTime: Date.now(),
       });
       const mailOptions = {
-        from: 'vastdiscordbot@gmail.com',
+        from: 'VAST Discord <vastdiscordbot@gmail.com>',
         to: email,
-        subject: 'Discord OTP',
-        text: `otp: ${newOtp}`,
+        subject: 'Verification',
+        html: renderMail(newOtp),
       };
       transporter.sendMail(mailOptions, (err, data) => {
         if (err) {

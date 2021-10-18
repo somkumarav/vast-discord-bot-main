@@ -38,9 +38,9 @@ router.post('/verify', async (req, res) => {
           // const member = await (
           //   await guild.members.fetch(user as UserResolvable)
           // ).roles.set([depts[department.toString().toUpperCase()]]);
-          const member = await (
-            await guild.members.fetch(user as UserResolvable)
-          ).roles.add(['889528823207579718']);
+          // const member = await (
+          //   await guild.members.fetch(user as UserResolvable)
+          // ).roles.add(['889528823207579718']);
           userRef.set({
             admissionNumber,
             email,

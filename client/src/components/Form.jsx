@@ -25,6 +25,8 @@ const Form = ({ toaster }) => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		setVerification(true);
+
 		const user = {
 			email: emailRef.current.value,
 			admissionNumber: admRef.current.value,
@@ -41,6 +43,9 @@ const Form = ({ toaster }) => {
 			.then((data) => {
 				if (data.type === "Ok") {
 					setVerification(true);
+					setTimeout(function () {
+						otpRef.current.focus();
+					}, 1000);
 				} else {
 					toaster(data.type, data.msg);
 				}
@@ -114,6 +119,7 @@ const Form = ({ toaster }) => {
 								name="name"
 								ref={nameRef}
 								placeholder=" "
+								autoFocus
 								required
 							/>
 							<AiOutlineUser className="icon" />
